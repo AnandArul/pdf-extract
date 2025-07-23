@@ -1,0 +1,5 @@
+Build GUI using TKinter
+Upload pdf (ratesheet)
+Extract data from the pdf
+Add the extracted data to excel.
+download the excel file
