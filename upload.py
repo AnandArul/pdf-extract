@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+from utilities.upload_handler import upload_file
+
+
 
 def create_main_window():
     root=tk.Tk()
@@ -31,6 +34,8 @@ def create_main_window():
     # --------title frame config--------
     header_frame=tk.Frame(root,bg='white', borderwidth=1, height=50, padx=10, pady=10, relief='ridge')
     header_frame.grid(row=1, column=0,sticky="ew")
+    header_frame.grid_columnconfigure(0, weight=1)
+    header_frame.grid_propagate(False)              # sets fixed height
     
     # --------configure titles inside frame--------
     header_label=tk.Label(header_frame, text="Extract Pdf Data", bg='white', font=('Arial', 18, 'bold'))
@@ -39,12 +44,8 @@ def create_main_window():
     # header_label.pack(expand=True)      #center alignment option 2
     
     # --------configure button inside frame--------
-    header_frame.grid_columnconfigure(0, weight=1)
-    header_frame.grid_columnconfigure(1, weight=0)
-    
     close_button=tk.Button(header_frame, text="Close", command=root.destroy, bg='white', relief='solid', highlightbackground="#e1e1e1", highlightthickness=1)
     close_button.grid(row=0, column=1, sticky="e")
-    
     
     # --------- ttk.Button on Right ---------
     # header_frame.grid_columnconfigure(0, weight=1)
@@ -56,6 +57,29 @@ def create_main_window():
     #     command=root.destroy
     # )
     # close_button.grid(row=0, column=1, sticky="e", padx=10)
+    
+    
+    # --------configure frame for upload button--------
+    upload_frame=tk.Frame(root,bg='white', borderwidth=1, padx=10, pady=20, relief='ridge')
+    upload_frame.grid(row=2,column=0,sticky='ew')
+    header_frame.grid_columnconfigure(0, weight=1)
+    # header_frame.grid_propagate(False)              # sets fixed height
+    
+    # --------configure frame for extracted data--------
+    root.grid_rowconfigure(3, weight=1)
+    data_frame=tk.Frame(root, bg='white', borderwidth=1, height=300, padx=20, pady=20, relief='ridge')
+    data_frame.grid(row=3,column=0, sticky='nsew')
+    
+    # --------load table data--------
+    # columns = ("name", "email", "phone")
+    # tree = ttk.Treeview(root, columns=columns, show="headings")
+    
+    # --------configure upload button inside frame--------
+    upload_button=tk.Button(upload_frame, text='Upload', command=lambda:upload_file(data_frame))
+    upload_button.grid(row=1,column=1, sticky="ew")
+    
+    
+    
     
     
     root.mainloop()
