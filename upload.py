@@ -43,7 +43,7 @@ def create_main_window():
     # header_label.pack(anchor='center')      #center alignment option 1
     # header_label.pack(expand=True)      #center alignment option 2
     
-    # --------configure button inside frame--------
+    # --------configure close button inside frame--------
     close_button=tk.Button(header_frame, text="Close", command=root.destroy, bg='white', relief='solid', highlightbackground="#e1e1e1", highlightthickness=1)
     close_button.grid(row=0, column=1, sticky="e")
     
@@ -65,18 +65,20 @@ def create_main_window():
     header_frame.grid_columnconfigure(0, weight=1)
     # header_frame.grid_propagate(False)              # sets fixed height
     
+    # --------configure upload button inside frame--------
+    upload_button=tk.Button(upload_frame, text='Upload', command=lambda:upload_file(data_frame,footer_frame))
+    upload_button.grid(row=1,column=1, sticky="ew")
+    
     # --------configure frame for extracted data--------
     root.grid_rowconfigure(3, weight=1)
     data_frame=tk.Frame(root, bg='white', borderwidth=1, height=300, padx=20, pady=20, relief='ridge')
     data_frame.grid(row=3,column=0, sticky='nsew')
     
-    # --------load table data--------
-    # columns = ("name", "email", "phone")
-    # tree = ttk.Treeview(root, columns=columns, show="headings")
+    # --------footer data--------
+    footer_frame=tk.Frame(root, bg='white', padx=10, pady=10, relief='ridge')
+    footer_frame.grid(row=4,column=0, sticky='ew')
     
-    # --------configure upload button inside frame--------
-    upload_button=tk.Button(upload_frame, text='Upload', command=lambda:upload_file(data_frame))
-    upload_button.grid(row=1,column=1, sticky="ew")
+    
     
     
     
